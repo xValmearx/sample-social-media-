@@ -31,12 +31,17 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    # django stuff
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    # 3rd party files
+    "crispy_forms",
+    "crispy_bootstrap5",
+    # local files
     "accounts.apps.AccountsConfig",
     "twit.apps.TwitConfig",
 ]
@@ -126,3 +131,21 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # Delcare the Custom User Model that Django should use.
 AUTH_USER_MODEL = "accounts.CustomUser"
+
+# Log in and Logout redirect urls
+LOGIN_REDIRECT_URL = "home"
+LOGOUT_REDIRECT_URL = "home"
+
+# Email Settings
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+DEFAULT_FROM_EMAIL = "noreply@localhost"
+EMAIL_HOST = "barnesbrothers.net"
+EMAIL_HOST_USER = ""
+EMAIL_HOST_PASSOWRD = ""
+EMAIL_PORT = 2500
+EMAIL_USE_TLS = False
+EMAIL_USE_SSL = False
+
+# crispy forms settings
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+CRISPY_TEMPLATE_PACK = "bootstrap5"
