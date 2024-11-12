@@ -6,9 +6,11 @@ from django.urls import reverse
 class Twit(models.Model):
     """Twit model"""
 
-    Author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="twits")
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="twits")
 
     body = models.TextField()
+
+    # image_url = ***** needs work
 
     create = models.DateTimeField(auto_now_add=True)
     update = models.DateTimeField(auto_now=True)
@@ -23,13 +25,13 @@ class Twit(models.Model):
 class Comment(models.Model):
     """Comment Model"""
 
-    article = models.ForeignKey(
+    twit = models.ForeignKey(
         Twit,
         on_delete=models.CASCADE,
         related_name="comments",
     )
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="comments")
-    text = models.CharField(max_length=140)
+    body = models.CharField(max_length=140)
 
     def __str__(self):
         """string method"""
