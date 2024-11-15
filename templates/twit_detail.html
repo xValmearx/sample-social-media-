@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}Detials{% endblock title %}
+
+{% block content %}
+  <div class = "article-entry">
+    <p>by {{twit.author}} | {{twit.date}}</p>
+    <p>{{twit.body}} </p>
+  </div>
+  <p>
+    <a href = {% url "twit_edit" twit.pk%}>Edit</a> |
+  <a href = {% url "twit_delete" twit.pk%}>Delete</a>
+</p>
+<p>back to <a href = {% url "twit_list" %}>All Articles</a>.</p>
+
+{% endblock content %}
