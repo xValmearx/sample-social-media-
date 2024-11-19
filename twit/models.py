@@ -19,7 +19,9 @@ class Twit(models.Model):
         return self.body
 
     def get_absolute_url(self):
-        return reverse("twit_detail", kwargs={"pk": self.pk})
+        return reverse(
+            "twit_list",
+        )
 
 
 class Comment(models.Model):
@@ -35,7 +37,7 @@ class Comment(models.Model):
 
     def __str__(self):
         """string method"""
-        return self.text
+        return self.body
 
-    # def get_absolute_url(self):
-    #     return reverse("")
+    def get_absolute_url(self):
+        return reverse("twit_list")

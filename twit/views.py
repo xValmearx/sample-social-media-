@@ -4,6 +4,7 @@ from django.views.generic import (
     UpdateView,
     DeleteView,
     CreateView,
+    FormView,
 )
 
 from django.contrib.auth.mixins import (
@@ -11,7 +12,9 @@ from django.contrib.auth.mixins import (
     UserPassesTestMixin,
 )
 
-from django.urls import reverse_lazy
+from .forms import CommentForm
+
+from django.urls import reverse_lazy, reverse
 from .models import Twit
 
 
@@ -36,11 +39,28 @@ class TwitListView(LoginRequiredMixin, ListView):
     template_name = "twit_list.html"
 
 
-class TwitDetailView(LoginRequiredMixin, DetailView):
-    """Twit Detial View"""
+class TwitDetailView(LoginRequiredMixin, DetailView, FormView):
+    """Artivle Detial View"""
 
     model = Twit
-    template_name = "twit_detail.html"
+    form_class = CommentForm
+    template_name = "Twit_detail.html"
+
+    def post(self, request, *args, **kwargs):
+        """handle post request"""
+        self.object = self.get_object()
+        return super().post(request, *args, **kwargs)
+
+    def form_valid(self, form):
+        comment = form.save(commit=False)
+        comment.twit = self.object
+        comment.author = self.request.user
+        comment.save()
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        twit = self.get_object()
+        return reverse("twit_detail", kwargs={"pk": twit.pk})
 
 
 class TwitUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
