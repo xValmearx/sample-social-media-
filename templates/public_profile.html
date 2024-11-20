@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+  <h3>Public Profile</h3>
+
+  <p>{{user.first_name}} {{user.last_name}}</p>
+
+  <p>{{user.email}}</p>
+
+  {% for twit in user.twits.all %}
+
+  <div class = "card w-200">
+    <div class = "card-header">
+        &middot;
+      <span class = "text-muted">
+        by {{twit.author}} | <a href = {% url "twit_detail" twit.pk%}>Details</a>
+      </span>
+    </div>
+    <div class = "card-body">
+      {{twit.body}}
+    </div>
+    <div class = "card-footer text-center text-muted">
+      {% if twit.author == user %}
+        <a href = {% url "twit_edit" twit.pk%}>Edit</a>
+        | <a href = {% url "twit_delete" twit.pk%}>Delete</a>
+      {% endif %}
+    </div>
+
+  {% endfor %}
+
+
+{% endblock content %}
