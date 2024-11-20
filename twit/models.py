@@ -40,4 +40,4 @@ class Comment(models.Model):
         return self.body
 
     def get_absolute_url(self):
-        return reverse("twit_list")
+        return reverse("twit_detail", kwargs={"pk": self.pk})

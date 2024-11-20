@@ -11,8 +11,8 @@
 
 
   <h4>comments</h4>
-  {% for comment in article.comments.all %}
-    <p>{{comment.author}} &middot; {{comment.text}}</p>
+  {% for comment in twit.comments.all %}
+    <p>{{comment.author}} &middot; {{comment.body}}</p>
   {% endfor %}
   <hr>
 

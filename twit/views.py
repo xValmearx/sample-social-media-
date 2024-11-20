@@ -55,7 +55,7 @@ class TwitDetailView(LoginRequiredMixin, DetailView, FormView):
         comment = form.save(commit=False)
         comment.twit = self.object
         comment.author = self.request.user
-        comment.save()
+        form.save()
         return super().form_valid(form)
 
     def get_success_url(self):
