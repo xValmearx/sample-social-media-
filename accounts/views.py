@@ -19,7 +19,11 @@ class PublicProfileView(ListView):
     template_name = "public_profile.html"
 
 
-# class PrivateProfileView(UpdateView):
-#     """Private profile view"""
-#     form_class = CustomUserCreationForm
-#     success_url = ""
+class PrivateProfileView(UpdateView):
+    """Private profile view"""
+
+    model = CustomUser
+    form_class = CustomUserChangeForm
+    template_name = "profile.html"
+
+    success_url = reverse_lazy("twit_list")

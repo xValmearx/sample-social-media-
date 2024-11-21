@@ -8,6 +8,8 @@
 
   <p>{{user.email}}</p>
 
+  <a class= "btn btn-success ml-2" href={% url "profile" user.pk%}>Edit My Profile</a>
+
   {% for twit in user.twits.all %}
 
   <div class = "card w-200">
