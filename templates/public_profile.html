@@ -10,6 +10,8 @@
 
   <a class= "btn btn-success ml-2" href={% url "profile" user.pk%}>Edit My Profile</a>
 
+  <a class = "btn btn-primary" href = {% url "password_change" %}>Change Password</a>
+
   {% for twit in user.twits.all %}
 
   <div class = "card w-200">
