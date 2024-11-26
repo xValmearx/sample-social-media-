@@ -7,7 +7,8 @@ from django.views.generic import (
     FormView,
 )
 
-from http.client import HTTPResponse
+from django.http import JsonResponse
+
 from django.http import HttpResponse
 from django.views import View
 
@@ -96,4 +97,28 @@ class TwitLikeView(LoginRequiredMixin, View):
     """Twit Like View"""
 
     def get(self, request, *args, **kwargs):
-        return HttpResponse("Works")
+        """GET Request"""
+
+        # Get out the data from the Get request
+        twit_id = request.GET.get("twit_id", None)
+        twit_action = request.GET.get("twit_action", None)
+
+        if not twit_id or not twit_action:
+            return JsonResponse({"success": False})
+
+        print(twit_id)
+        print(twit_action)
+
+        twit = Twit.objects.get(id=twit_id)
+
+        if twit_action == "like":
+            # Do stuff
+            twit.likes.add(request.user)
+        else:
+            twit.likes.remove(request.user)
+
+        return JsonResponse(
+            {
+                "success": True,
+            }
+        )

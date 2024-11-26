@@ -10,7 +10,7 @@ class Twit(models.Model):
 
     likes = models.ManyToManyField(
         settings.AUTH_USER_MODEL,
-        related_name="liked_articles",
+        related_name="liked_twits",
         blank=True,
     )
 
