@@ -30,7 +30,7 @@ class TwitCreateView(LoginRequiredMixin, CreateView):
     model = Twit
 
     template_name = "twit_new.html"
-    fields = ("body",)
+    fields = ("body", "image_url")
 
     def form_valid(self, form):
         """return user who created the form"""
@@ -73,7 +73,7 @@ class TwitUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     """Twit update view"""
 
     model = Twit
-    fields = ("body",)
+    fields = ("body", "image_url")
     template_name = "twit_edit.html"
 
     def test_func(self):

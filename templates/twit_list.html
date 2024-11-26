@@ -5,6 +5,7 @@
 {% block content %}
   <a class = "btn btn-success ml-2" href = {% url "twit_new" %} >New Twit</a>
 
+  <div class = "container-fluid">
   {% for twit in twit_list %}
     <div class = "card w-200">
       <div class = "card-header">
@@ -14,6 +15,13 @@
         </span>
       </div>
       <div class = "card-body">
+
+        {% if twit.image_url %}
+        <p>
+        <img src="{{twit.image_url}}" alt="Twit_Image">
+        </p>
+        {% endif %}
+
         <p>{{twit.body}}</p>
 
         <p>
@@ -54,5 +62,6 @@
 
     <br>
   {% endfor %}
+  </div>
 
 {% endblock content %}

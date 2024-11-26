@@ -5,7 +5,11 @@
 
 {% block content %}
   <div class = "article-entry">
-    <p>by {{twit.author}} | {{twit.date}}</p>
+    {% if twit.image_url %}
+    <p>
+    <img src="{{twit.image_url}}" alt="Twit_Image">
+    </p>
+    {% endif %}
     <p>{{twit.body}} </p>
   </div>
 

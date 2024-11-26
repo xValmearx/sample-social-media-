@@ -16,6 +16,8 @@ class Twit(models.Model):
 
     body = models.TextField()
 
+    image_url = models.CharField(max_length=300, blank=True)
+
     # image_url = ***** needs work
 
     create = models.DateTimeField(auto_now_add=True)
