@@ -8,6 +8,12 @@ class Twit(models.Model):
 
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="twits")
 
+    likes = models.ManyToManyField(
+        settings.AUTH_USER_MODEL,
+        related_name="liked_articles",
+        blank=True,
+    )
+
     body = models.TextField()
 
     # image_url = ***** needs work
@@ -22,6 +28,10 @@ class Twit(models.Model):
         return reverse(
             "twit_list",
         )
+
+    def get_like_url(self):
+        """get like url based on PK"""
+        return reverse("twit_like", kwargs={"pk": self.pk})
 
 
 class Comment(models.Model):

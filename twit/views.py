@@ -7,6 +7,11 @@ from django.views.generic import (
     FormView,
 )
 
+from http.client import HTTPResponse
+from django.http import HttpResponse
+from django.views import View
+
+
 from django.contrib.auth.mixins import (
     LoginRequiredMixin,
     UserPassesTestMixin,
@@ -85,3 +90,10 @@ class TwitDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     def test_func(self):
         obj = self.get_object()
         return obj.author == self.request.user
+
+
+class TwitLikeView(LoginRequiredMixin, View):
+    """Twit Like View"""
+
+    def get(self, request, *args, **kwargs):
+        return HttpResponse("Works")
