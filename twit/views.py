@@ -106,9 +106,6 @@ class TwitLikeView(LoginRequiredMixin, View):
         if not twit_id or not twit_action:
             return JsonResponse({"success": False})
 
-        print(twit_id)
-        print(twit_action)
-
         twit = Twit.objects.get(id=twit_id)
 
         if twit_action == "like":

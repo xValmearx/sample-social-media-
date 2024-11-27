@@ -6,7 +6,11 @@ from django.urls import reverse
 class Twit(models.Model):
     """Twit model"""
 
-    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="twits")
+    author = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        related_name="twits",
+    )
 
     likes = models.ManyToManyField(
         settings.AUTH_USER_MODEL,
