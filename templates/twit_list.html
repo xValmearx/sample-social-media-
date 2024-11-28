@@ -13,6 +13,7 @@
           &middot;
         <span class = "text-muted">
           by <a href = "{% url "public_profile" twit.author.pk%}">{{twit.author}}</a> |
+          <a href = "{% url "twit_detail" twit.pk%}">Details</a>
         </span>
       </div>
       <div class = "card-body">

@@ -27,6 +27,11 @@ class ReviewTest(TestCase):
 
         cls.comment = Comment.objects.create(twit=cls.twit, author=cls.user, body="Test Comment body")
 
+    def test_login(self):
+        # Log in the test user
+        login = self.client.login(username="testuser", password="secret")
+        self.assertTrue(login)
+
     def test_user_model(self):
         """Twit Testing"""
         self.assertEqual(self.twit.author.username, "testuser")
@@ -41,3 +46,17 @@ class ReviewTest(TestCase):
         self.assertEqual(self.comment.twit.body, "Test Twit body")
         self.assertEqual(self.comment.author.username, "testuser")
         self.assertEqual(self.comment.body, "Test Comment body")
+
+    def test_twit_list_page(self):
+        """test for the Main page or the list view of all the twits"""
+
+        # Test user must me logged in or else my template will redirect them to the login page
+        login = self.client.login(username="testuser", password="secret")
+
+        # get the root of the page
+        response = self.client.get("")
+
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, "twit_list.html")
+        self.assertContains(response, "Test Twit body")
+        self.assertContains(response, "Test Comment body")
