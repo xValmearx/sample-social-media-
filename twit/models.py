@@ -32,7 +32,7 @@ class Twit(models.Model):
 
     def get_absolute_url(self):
         return reverse(
-            "twit_list",
+            "home",
         )
 
     def get_like_url(self):
