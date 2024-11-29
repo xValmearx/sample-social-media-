@@ -95,3 +95,54 @@ class ReviewTest(TestCase):
 
         # checks for the user name
         self.assertContains(response, "testuser")
+
+    def test_create_twit(self):
+
+        # must be logged in to test pages
+        login = self.client.login(username="testuser", password="secret")
+
+        # get public profile page
+        response = self.client.get(reverse("twit_new"))
+
+        # checks of the page is found
+        self.assertEqual(response.status_code, 200)
+
+        # checks the templates being used
+        self.assertTemplateUsed("twit_new.html")
+
+        # checks for the user name
+        self.assertContains(response, "Create New Twit")
+
+    def test_Edit_twit(self):
+
+        # must be logged in to test pages
+        login = self.client.login(username="testuser", password="secret")
+
+        # get public profile page
+        response = self.client.get(reverse("twit_edit", kwargs={"pk": 1}))
+
+        # checks of the page is found
+        self.assertEqual(response.status_code, 200)
+
+        # checks the templates being used
+        self.assertTemplateUsed("twit_edit.html")
+
+        # checks for the user name
+        self.assertContains(response, "Update Twit")
+
+    def test_Delete_twit(self):
+
+        # must be logged in to test pages
+        login = self.client.login(username="testuser", password="secret")
+
+        # get public profile page
+        response = self.client.get(reverse("twit_delete", kwargs={"pk": 1}))
+
+        # checks of the page is found
+        self.assertEqual(response.status_code, 200)
+
+        # checks the templates being used
+        self.assertTemplateUsed("twit_delete.html")
+
+        # checks for the user name
+        self.assertContains(response, "Delete Twit")
