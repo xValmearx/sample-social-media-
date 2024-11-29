@@ -1,7 +1,9 @@
 # Assignment 4 - Creating Tweeter (A Twitter Clone)
 
 ## Author
-
+#Caleb Taylor
+#CIS 218
+#11/29/2024
 
 
 ## Description
@@ -132,8 +134,14 @@ https://getbootstrap.com/docs/5.3/getting-started/introduction/
 | **Extra Credit** Full Heroku Deployment     |   **5**|
 
 ## Outside Resources Used
+found code to sign in test user, I could not find author
+    <!-- def test_login(self):
 
+        # Log in the test user
+
+        self.client.login(username='testuser', password='testpassword') -->
 
 
 ## Known Problems, Issues, And/Or Errors in the Program
+No problem have been found
 
