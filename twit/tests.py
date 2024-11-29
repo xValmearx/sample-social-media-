@@ -54,9 +54,44 @@ class ReviewTest(TestCase):
         login = self.client.login(username="testuser", password="secret")
 
         # get the root of the page
-        response = self.client.get("")
+        response = self.client.get(reverse("home"))
 
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "twit_list.html")
         self.assertContains(response, "Test Twit body")
         self.assertContains(response, "Test Comment body")
+
+    def test_public_profile(self):
+
+        # get public profile page
+        response = self.client.get(reverse("public_profile", kwargs={"pk": 1}))
+
+        # checks of the page is found
+        self.assertEqual(response.status_code, 200)
+
+        # checks the templates being used
+        self.assertTemplateUsed("public_profile.html")
+
+        # checks for the user name
+        self.assertContains(response, "testuser")
+
+        # checks for the email
+        self.assertContains(response, "test@email.com")
+
+    def test_private_profile(self):
+        """Test the user private profile"""
+
+        # Test user must me logged in, private page can only be acessed to the user itself
+        login = self.client.login(username="testuser", password="secret")
+
+        # get public profile page
+        response = self.client.get(reverse("profile", kwargs={"pk": 1}))
+
+        # checks of the page is found
+        self.assertEqual(response.status_code, 200)
+
+        # checks the templates being used
+        self.assertTemplateUsed("profile.html")
+
+        # checks for the user name
+        self.assertContains(response, "testuser")
